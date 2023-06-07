@@ -89,52 +89,97 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="btnCreate" class="btn btn-primary">Create</button>
+                    <button type="button" id="btnCreate" class="btn btn-outline-primary">Create</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal Update Customer -->
-    <div class="modal fade" id="mdUpdate" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
-        data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+    <!-- Modal update -->
+    <div class="modal fade" id="modalUpdate" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal update customer</h1>
+                    <h1 class="modal-title fs-5">Modal update customer</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post">
-                        <div class="row mb-3">
-                            <div class="col-lg-6">
-                                <label for="fullNameUp">Full Name</label>
-                                <input type="text" id="fullNameUp" class="form-control">
+                    <form class="forms-sample" method="post">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="title">Full Name</label>
+                                <input type="text" class="form-control" id="fullNameUp" name="fullNameUp"
+                                    placeholder="Enter title">
                             </div>
-                            <div class="col-lg-6">
-                                <label for="emailUp">Email</label>
-                                <input type="email" id="emailUp" class="form-control">
+                            <div class="form-group col-6">
+                                <label for="price">Email</label>
+                                <input type="email" class="form-control" id="emailUp" name="emailUp"
+                                    placeholder="Enter price">
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-lg-6">
-                                <label for="phoneUp">Phone</label>
-                                <input type="tel" id="phoneUp" class="form-control">
+                        <div class="row mt-2">
+                            <div class="form-group col-6">
+                                <label for="summary">Phone</label>
+                                <input type="tel" class="form-control" id="phoneUp" name="phoneUp"
+                                    placeholder="Enter summary">
                             </div>
-                            <div class="col-lg-6">
-                                <label for="addressUp">Address</label>
-                                <input type="text" id="addressUp" class="form-control">
+                            <div class="form-group col-6">
+                                <label for="description">Address</label>
+                                <input type="text" class="form-control" id="addressUp" name="addressUp"
+                                    placeholder="Enter description">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="btnUpdate" class="btn btn-outline-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="btnUpdate" class="btn btn-outline-secondary">Update</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal Deposit -->
+    <div class="modal fade" id="modalDeposit" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+    data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal deposit</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="fullNameDep">Full Name</label>
+                            <input type="text" id="fullNameDep" class="form-control" readonly>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="emailDep">Email</label>
+                            <input type="email" id="emailDep" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="balanceDep">Current balance</label>
+                            <input type="tel" id="balanceDep" class="form-control" readonly>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="transactionAmountDep">Transaction Amount</label>
+                            <input type="text" id="transactionAmountDep" class="form-control">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="btnDeposit" class="btn btn-outline-success">Deposit</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <script src="./assets/jquery/jquery-3.6.4.min.js"></script>
     <script src="./assets/bootstrap/v-5.3.0/js/bootstrap.bundle.js"></script>
@@ -143,12 +188,14 @@
     <script src="./assets/js/appBase.js"></script>
 
     <script>
-        let id = 1;
-        let customers = [
-            new Customer(id++, 'NVA', 'nva@gmail.com', '1234', '28 Nguyễn Tri Phương', 0),
-            new Customer(id++, 'NVB', 'nvb@gmail.com', '2345', '29 Hà Nội', 0),
-            new Customer(id++, 'NVC', 'nvc@gmail.com', '3456', '30 Ngô Quyền', 2000),
-        ];
+        // let id = 1;
+        // let customers = [
+        //     new Customer(id++, 'NVA', 'nva@gmail.com', '1234', '28 Nguyễn Tri Phương', 0),
+        //     new Customer(id++, 'NVB', 'nvb@gmail.com', '2345', '29 Hà Nội', 0),
+        //     new Customer(id++, 'NVC', 'nvc@gmail.com', '3456', '30 Ngô Quyền', 2000),
+        // ];
+
+        customerId = 0;
 
 
         let tbody = $('#tblCustomer tbody');
@@ -156,7 +203,7 @@
         function renderCustomer(obj) {
             return `
             
-            <tr id='tr_${obj.id}'>
+            <tr id="tr_${obj.id}">
                     <th scope="row">${obj.id}</th>
                     <td>${obj.fullName}</td>
                     <td>${obj.email}</td>
@@ -164,7 +211,13 @@
                     <td>${obj.balance}</td>
                     <td>${obj.address}</td>
                     <td class="text-center">
-                        <button class='btn btn-outline-secondary edit' data-id='${obj.id}'>
+                        <button class="btn btn-outline-secondary edit" 
+                            data-id="${obj.id}"
+                            data-full-name="${obj.fullName}"
+                            data-email="${obj.email}"
+                            data-phone="${obj.phone}"
+                            data-address="${obj.address}"
+                        >
                             <i class="fa fa-pencil-alt"></i>
                         </button>
                         <button class="btn btn-outline-success">
@@ -176,7 +229,9 @@
                         <button class="btn btn-outline-primary">
                             <i class="fas fa-exchange-alt"></i>
                         </button>
-                        <button  class='btn btn-outline-danger delete' data-id='${obj.id}'>
+                        <button class="btn btn-outline-danger delete"
+                            data-id="${obj.id}"
+                        >
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
@@ -184,40 +239,95 @@
             `;
         }
 
-        function getAllCustomers() {
-            customers.forEach((customer) => {
-                let str = renderCustomer(customer);
-                tbody.prepend(str);
-            });
-            addEventEdit();
-            addEventDelete();
+        const getAllCustomers = () => {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:3300/customers'
+            })
+                .done((data) => {
+                    $.each(data, (index, item) => {
+                        const str = renderCustomer(item)
+                        $('#tblCustomer tbody').prepend(str)
+                    })
+                    handleAddEventShowModalUpdate();
+                    handleAddEventConfirmDelete();
+                    handleAddEventShowModalDeposit();
+                })
+                .fail((error) => {
+                    console.log(error);
+                })
         }
 
         getAllCustomers();
 
-        function getCustomerById(customerId) {
-            return customers.find(item => item.id == customerId);
+        
+        $('#btnCreate').on('click', () => {
+            const fullName = $('#fullNameCre').val()
+            const email = $('#emailCre').val()
+            const phone = $('#phoneCre').val()
+            const address = $('#addressCre').val()
+            const balance = 0
+            const deleted = false
+
+            const obj = {
+                fullName,
+                email,
+                phone,
+                address,
+                balance,
+                deleted
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:3300/customers',
+                data: obj
+            })
+
+                .done((data) => {
+                    const str = renderCustomer(data)
+                    $('#tblCustomer tbody').prepend(str)
+                    $('#modalCreate').modal('hide')
+                })
+                .fail((error) => {
+                    console.log(error);
+                })
+        })
+
+        const handleAddEventShowModalUpdate = () => {
+            $('.edit').on('click', function() {
+                customerId = $(this).data('id')
+
+                findByCustomerId(customerId).then((data) => {
+                    assignModalUpdate(data)
+                    $('#modalUpdate').modal('show')
+                })
+                .catch((error) => {
+                        console.log(error);
+                    })
+            })
         }
 
-        function addEventEdit() {
-            $('.edit').on('click', function () {
-                customerId = $(this).data('id');
-                console.log(id);
-                let customer = getCustomerById(customerId);
-                if (customer) {
-                    $('#fullNameUp').val(customer.fullName);
-                    $('#emailUp').val(customer.email);
-                    $('#phoneUp').val(customer.phone);
-                    $('#addressUp').val(customer.address);
-                    $('#mdUpdate').modal('show');
-                }
-            });
+        const handleAddEventShowModalDeposit = () => {
+            $('.deposit').on('click', function() {
+                customerId = $(this).data('id')
+
+                findByCustomerId(customerId).then((data) => {
+                    assignModalDeposit(data)
+                    $('#modalDeposit').modal('show')
+                })
+                .catch((error) => {
+                        console.log(error);
+                    })
+            })
         }
 
-        function addEventDelete() {
+
+
+
+        const handleAddEventConfirmDelete = () => {
             $('.delete').on('click', function () {
-
-                customerId = $(this).data('id');
+                customerId = $(this).data('id')
 
                 Swal.fire({
                     title: 'Are you sure?',
@@ -229,106 +339,138 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        doDelete(customerId).then(() => {
+                            $('#tr_' + customerId).remove()
 
-                        customers = customers.filter(item => item.id != customerId);
-                       
-
-                        $('#tr_' + customerId).remove();
-                        
-                  
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Your work has been saved',
-                            showConfirmButton: false,
-                            timer: 1500
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'The customer has been deleted.',
+                                showConfirmButton: false,
+                                timer: 2500
+                            })
                         })
-                        addEventEdit();
-                        addEventDelete();
+                            .catch((error) => {
+                                console.log(error);
+                            })
                     }
                 })
-               
             })
         }
 
-        $('#btnCreate').on('click', () => {
-            let fullName = $('#fullNameCre').val();
-            let email = $('#emailCre').val();
-            let phone = $('#phoneCre').val();
-            let address = $('#addressCre').val();
-            let balance = 0
 
-            let customer = {
-                id,
-                fullName,
-                email,
-                phone,
-                address,
-                balance,
+        const doDelete = (id) => {
+            const obj = {
+                deleted: true
             }
 
-            ++id;
+            return $.ajax({
+                headers: {
+                    'accept': 'application/json',
+                    'content-type': 'application/json'
+                },
+                type: 'DELETE',
+                url: 'http://localhost:3300/customers/' + id,
+                data: JSON.stringify(obj)
+            })
+        }
 
-            customers.push(customer);
 
-            let str = renderCustomer(customer);
-            $('#tblCustomer tbody').prepend(str);
+        const assignModalUpdate = (data) => {
+            $('#fullNameUp').val(data.fullName)
+            $('#emailUp').val(data.email)
+            $('#phoneUp').val(data.phone)
+            $('#addressUp').val(data.address)
+        }
 
-            addEventEdit();
-            addEventDelete();
+        const assignModalDeposit = (data) => {
+            $('#fullNameDep').val(data.fullName)
+            $('#emailDep').val(data.email)
+            $('#balanceDep').val(data.balance)
+            $('#transactionAmountDep').val(data.transactionAmount)
+        }
 
-        })
+        const findByCustomerId = (id) => {
+            return $.ajax({
+                url: 'http://localhost:3300/customers/' + id
+            })
+        }
+
 
         $('#btnUpdate').on('click', () => {
-            let fullName = $('#fullNameUp').val();
-            let email = $('#emailUp').val();
-            let phone = $('#phoneUp').val();
-            let address = $('#addressUp').val();
-            let balance = 0;
-            let deleted = false;
+            let fullName = $('#fullNameUp').val()
+            let email = $('#emailUp').val()
+            let phone = $('#phoneUp').val()
+            let address = $('#addressUp').val()
 
-            let customer = {
-                id: customerId,
+            const obj = {
                 fullName,
                 email,
                 phone,
-                address,
-                balance,
-                deleted
+                address
             }
 
-            handleUpdateCustomer(customer).then((data) => {
-                console.log(customer, data)
-                customer = data;
-                let str = renderCustomer(customer);
-                $('#tr_' + customerId).replaceWith(str);
-                
-                addEventEdit();
-                addEventDelete();
+            doUpdate(obj)
+        })
 
-                $('#mdUpdate').modal('hide');
-            })
-                .catch((error) => {
-                    console.log(error);
-                })
+        $('#btnDeposit').on('click', () => {
+            let fullName = $('#fullNameDep').val()
+            let email = $('#emailDep').val()
+            let balance= $('#balanceDep').val()
+            let transactionAmount = $('#transactionAmountDep').val()
+
+            const obj = {
+                fullName,
+                email,
+                balance,
+                transactionAmount
+            }
+
+            doDeposit(obj)
         })
 
 
-        function handleUpdateCustomer(obj) {
-            return new Promise((resolve, reject) => {
-                const index = customers.findIndex(item => item.id === obj.id);
-                if (index === -1) {
-                    reject(new Error('Customer not found'));
-                    return;
-                }
-                customers[index].fullName = obj.fullName;
-                customers[index].email = obj.email;
-                customers[index].phone = obj.phone;
-                customers[index].address = obj.address;
-
-                resolve(customers[index]);
-            });
+        const doUpdate = (obj) => {
+            $.ajax({
+                headers: {
+                    'accept': 'application/json',
+                    'content-type': 'application/json'
+                },
+                type: 'PATCH',
+                url: 'http://localhost:3300/customers/' + customerId,
+                data: JSON.stringify(obj)
+            })
+                .done((data) => {
+                    const str = renderCustomer(data)
+                    $('#tr_' + customerId).replaceWith(str)
+                    $('#modalUpdate').modal('hide')
+                })
+                .fail((error) => {
+                    console.log(error);
+                })
         }
+
+
+        const doDeposit= (obj) => {
+            $.ajax({
+                headers: {
+                    'accept': 'application/json',
+                    'content-type': 'application/json'
+                },
+                type: 'PATCH',
+                url: 'http://localhost:3300/customers/' + customerId,
+                data: JSON.stringify(obj)
+            })
+                .done((data) => {
+                    const str = renderCustomer(data)
+                    $('#tr_' + customerId).replaceWith(str)
+                    $('#modalDeposit').modal('hide')
+                })
+                .fail((error) => {
+                    console.log(error);
+                })
+        }
+
     </script>
 </body>
 
